@@ -1,4 +1,4 @@
-### 合并第一列中相同名字的列
+### 合并 table中 相同内容的列
     jQuery.fn.rowspan = function(colIdx) {
         return this.each(function(){
             var that;
