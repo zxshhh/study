@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动——左右</title>
+    <style type="text/css">
+        #scroll {
+            width: 200px;
+            height: 60px;
+            margin: 50px auto 0;
+            position: relative;
+            overflow: hidden;
+            background: red;
+        }
+
+        #scroll ul {
+            position: absolute;
+        }
+
+        #scroll li {
+            float: left;
+            width: 182px;
+            height: 108px;
+            text-align: center;
+            list-style: none;
+        }
+
+        #scroll li a:hover {
+            position: relative;
+            top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scroll">
+        <ul>
+            <li>12345678899123245r0</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    window.onload = function () {
+        var oDiv = document.getElementById('scroll');
+        var oUl = oDiv.getElementsByTagName('ul')[0];
+        var aLi = oDiv.getElementsByTagName('li');
+        var speed = -1;
+        var timer = null;
+        oUl.innerHTML += oUl.innerHTML;
+        oUl.style.width = aLi[0].offsetWidth * aLi.length + 'px';
+        timer = setInterval(function () {
+            oUl.style.left = oUl.offsetLeft + speed + 'px';
+            if (oUl.offsetLeft < - oUl.offsetWidth / 2) {
+                oUl.style.left = '0';
+            } else if (oUl.offsetLeft > 0) {
+                oUl.style.left = - oUl.offsetWidth / 2 + 'px';
+            }
+        }, 30);
+        oUl.onmouseover = function () {
+            clearInterval(timer);
+        };
+        oUl.onmouseout = function () {
+            timer = setInterval(function () {
+                oUl.style.left = oUl.offsetLeft + speed + 'px';
+                if (oUl.offsetLeft < -oUl.offsetWidth / 2) {
+                    oUl.style.left = '0';
+                } else if (oUl.offsetLeft > 0) {
+                    oUl.style.left = - oUl.offsetWidth / 2 + 'px';
+                }
+            }, 30);
+        };
+    };
+</script>
