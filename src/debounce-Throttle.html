@@ -1,13 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
     <title>debounce&throttle</title>
 </head>
+<style>
+    input {
+        width: 200px;
+        height: 30px;
+    }
+</style>
+
 <body>
     <!-- 函数节流（throttle）与函数去抖（debounce） -->
-    
+    <h2>以下场景由于事件频繁被触发，因而频繁执行DOM操作、资源加载等重行为，导致UI停顿甚至浏览器崩溃。</h2>
+    <P>
+        1、window对象的resize、scroll事件<br>
+        2、拖拽时的mousemove事件<br>
+        3、射击游戏中的mousedown、keydown事件<br>
+        4、文字输入、自动完成的keyup事件<br>
+        实际上对于window的resize事件，实际需求大多为停止改变大小n毫秒后 执行后续操作处理；而其他事件大多的需求是以一定的频率执行后续处理。<br>
+        针对这两种需求就出现了debounce和throttle两种解决办法。
+    </P>
+    <span>debounce</span><br>
+    <input class="btnDebounce" placeholder="鼠标离开时触发事件" /><br>
+
+    <span>throttle</span><br>
+    <input class="btnThrottle" placeholder="鼠标离开时触发事件" /><br>
+
 </body>
+<script>
+    $(function () {
+        /**
+        * 空闲控制 返回函数连续调用时，空闲时间必须大于或等于 idle，action 才会执行
+        * @param idle   {number}    空闲时间，单位毫秒
+        * @param action {function}  请求关联函数，实际应用需要调用的函数
+        * @return {function}    返回客户调用函数
+        */
+
+        var debounce = function (idle, action) {
+            var last
+            return function () {
+                var ctx = this
+                clearTimeout(last)
+                last = setTimeout(function () {
+                    action.apply(ctx)
+                }, idle)
+            }
+        }
+        function mouseLeav() {
+            $(".btnDebounce").on("mouseout", function () {
+                alert("0")
+            })
+        }
+        debounce(3000, mouseLeav());
+
+
+        /**
+        * 频率控制 返回函数连续调用时，action 执行频率限定为 次 / delay
+        * @param delay  {number}    延迟时间，单位毫秒
+        * @param action {function}  请求关联函数，实际应用需要调用的函数
+        * @return {function}    返回客户调用函数
+        */
+        var throttle = function (delay, action) {
+            var last = 0
+            return function () {
+                var curr = +new Date()
+                if (curr - last > delay) {
+                    action.apply(this, arguments)
+                    last = curr
+                }
+            }
+        }
+        function throttleLeave() {
+            $(".btnThrottle").on("mouseout", function () {
+                alert("1")
+            })
+        }
+        throttle(2000, throttleLeave())
+    })
+</script>
+
 </html>
