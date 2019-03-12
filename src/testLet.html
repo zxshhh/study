@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let con = {
+      mar: function() {
+        setTimeout(function() {
+          console.log(this.a)
+        })
+      },
+      a: 1
+    }
+    con.mar()
+
+    let arr = [{ a: 1 }, { a: 2 }, { a: 3 }]
+    let obj = {}
+    for ({ a: obj.b } of arr) {
+      console.log(obj.b)
+    }
+
+    axios.get("http://loaclhost:3000")//当收到相应时，这个promise的状态会变为reslove，但是拿到值需要用户主动调用then方法
+    axios.get("http://loaclhost:3000")
+    .then(res=>{
+        // 主动调用then方法获取值后用户可以自己决定拿这个值干什么
+    })
+
+    axios.get("http://localhost:3000")
+    .then(res=>{
+        // do something
+    },err=>{
+        // 错误处理
+    })
+    // promise提供catch方法也是同样的效果
+    axios.get("http://localhost:3000")
+    .then(res=>{
+        // do something
+    }).catch(res=>{
+        // catch err
+    })
+
+    async function getInfo(){
+        let res1 = await axios.get("http://localhost:3000/mock.json")
+        let res2 = await axios.get("http://localhost:3000/mock2.json")//等到收到mock.json响应结果后在发出请求
+        let res3 = await axios.get("http://localhost:3000/mock3.json")//等到收到mock2.json响应结果后在发出请求
+        // 等到mock3.json响应结果后，才执行后续代码
+        //do something after response
+    }
+  </script>
+</html>

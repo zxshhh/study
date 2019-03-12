@@ -1,109 +1,112 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en-US">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <script src="js/jquery.js"></script>
     <title>无缝滚动——左右</title>
     <style type="text/css">
-        #scroll {
-            width: 200px;
-            height: 60px;
-            margin: 50px auto 0;
-            position: relative;
-            overflow: hidden;
-            background: red;
-        }
+      #scroll {
+        width: 200px;
+        height: 60px;
+        margin: 50px auto 0;
+        position: relative;
+        overflow: hidden;
+        background: red;
+      }
 
-        #scroll ul {
-            position: absolute;
-        }
+      #scroll ul {
+        position: absolute;
+      }
 
-        #scroll li {
-            float: left;
-            width: 182px;
-            height: 108px;
-            text-align: center;
-            list-style: none;
-        }
+      #scroll li {
+        float: left;
+        width: 182px;
+        height: 108px;
+        text-align: center;
+        list-style: none;
+      }
 
-        #scroll li a:hover {
-            position: relative;
-            top: 2px;
-        }
+      #scroll li a:hover {
+        position: relative;
+        top: 2px;
+      }
 
+      .my_select {
+        position: relative;
+        margin: 100px;
+        font-size: 12px;
+      }
+      .my_select_select {
+        position: absolute;
+        left: 0;
+        top: 0;
+        *top: 1px;
+        width: 100px;
+        clip: rect(0 auto auto 80px);
+        height: 22px;
+        line-height: 18px;
+      }
+      .my_select_text {
+        width: 80px;
+        *height: 16px;
+        *line-height: 16px;
+      }
 
-            .my_select {  
-                position:relative;  
-                margin:100px;  
-                font-size:12px;  
-            }  
-            .my_select_select {  
-                position:absolute; left:0; top:0; *top:1px;  
-                width:100px;  
-                clip:rect(0 auto auto 80px);  
-                height:22px; line-height:18px;  
-            }  
-            .my_select_text {  
-                width:80px; *height:16px; *line-height:16px;  
-            } 
+      .div-box {
+        position: relative;
+        display: inline-block;
+        outline: 0;
+      }
 
+      .text {
+        height: 32px;
+        line-height: 32px;
+        margin: 0;
+        padding: 0 6px;
+        cursor: pointer;
+      }
 
-            .div-box {
-      position: relative;
-      display: inline-block;
-      outline: 0;
-    }
-    
-    .text {
-      height: 32px;
-      line-height: 32px;
-      margin: 0;
-      padding: 0 6px;
-      cursor: pointer;
-    }
-    
-    .dropdown-menu {
-      position: absolute;
-      width: 200px;
-      color: #FFF;
-      margin: 0;
-      padding: 10px;
-      list-style: none;
-      border-radius: 10px;
-      background-color: #555;
-      -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, .1);
-    }
-    
-    .dropdown-menu h4 {
-      text-align: center;
-      margin: 10px 0;
-    }
-    
-    .dropdown-menu li {
-      border-bottom: 1px solid #999;
-      padding: 0 6px;
-      line-height: 28px;
-    }
-    
-    .dropdown-menu li:hover {
-      background-color: black;
-      cursor: pointer;
-    }
-    
-    .tip {
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 10px solid #555;
-      display: inline-block;
-    }
+      .dropdown-menu {
+        position: absolute;
+        width: 200px;
+        color: #fff;
+        margin: 0;
+        padding: 10px;
+        list-style: none;
+        border-radius: 10px;
+        background-color: #555;
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+      }
+
+      .dropdown-menu h4 {
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .dropdown-menu li {
+        border-bottom: 1px solid #999;
+        padding: 0 6px;
+        line-height: 28px;
+      }
+
+      .dropdown-menu li:hover {
+        background-color: black;
+        cursor: pointer;
+      }
+
+      .tip {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid #555;
+        display: inline-block;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- <div id="scroll">
         <ul>
             <li>12345678899123245r0</li>
@@ -128,58 +131,72 @@
     </div>   -->
 
     <div class="div-box" tabindex="-1">
-        <p class="text"><span class="texts">Holle Word</span> <span class="tip"></span></p>
-        <ul class="dropdown-menu">
-          <input class="my_select_text" id="my_select_text02" value="hello world!"/>  
-          <hr>
-          <li>test</li>
-          <li>dome</li>
-          <li>标签</li>
-        </ul>
+      <p class="text"><span class="texts">Holle Word</span> <span class="tip"></span></p>
+      <ul class="dropdown-menu">
+        <input class="my_select_text" id="my_select_text02" value="hello world!" />
+        <hr />
+        <li>test</li>
+        <li>dome</li>
+        <li>标签</li>
+      </ul>
     </div>
-
-</body>
-
+  </body>
 </html>
 <script type="text/javascript">
-    $(function(){  
-        $(".my_select_select").change(function(){  
-            var id = $(this).attr('id');  
-            var num = id.substr(id.length - 2, 2);  
-            $("#my_select_text" + num).val($(this).val());  
-        });  
+  $(function() {
+    $('.my_select_select').change(function() {
+      var id = $(this).attr('id')
+      var num = id.substr(id.length - 2, 2)
+      $('#my_select_text' + num).val($(this).val())
+    })
 
-
-
-
-        var isBox = false; // 定义一个触发焦点事件的开关，默认为不开启状态 || 也可以给input设置一个属性，来判断
-        $(".dropdown-menu").hide();
-        $(".div-box").focus(function () { // div绑定焦点事件，触发时打开焦点开关
-        $(this).find(".dropdown-menu").show();
-        isBox = true;
+    var isBox = false // 定义一个触发焦点事件的开关，默认为不开启状态 || 也可以给input设置一个属性，来判断
+    $('.dropdown-menu').hide()
+    $('.div-box').focus(function() {
+      // div绑定焦点事件，触发时打开焦点开关
+      $(this)
+        .find('.dropdown-menu')
+        .show()
+      isBox = true
+    })
+    $('.div-box').mousemove(function() {
+      // 鼠标在div区域内打开焦点开关
+      isBox = true
+    })
+    $('.div-box').mouseout(function() {
+      // 鼠标在div区域外关闭焦点开关
+      isBox = false
+    })
+    $('.div-box').blur(function() {
+      // div失去焦点时通过焦点开关状态判断鼠标所在区域
+      if (isBox == true) return false
+      $(this)
+        .find('.dropdown-menu')
+        .hide()
+    })
+    $('.dropdown-menu')
+      .find('li')
+      .each(function() {
+        $(this).on('click', function() {
+          isBox = false
+          var text = $(this).text()
+          $(this)
+            .parent()
+            .siblings('.text')
+            .find('.texts')
+            .text(text)
+          $(this)
+            .parent()
+            .parent()
+            .blur() // *********  清除焦点事件  (div本身是没焦点的)
+          $(this)
+            .parent()
+            .hide()
         })
-        $(".div-box").mousemove(function () { // 鼠标在div区域内打开焦点开关
-        isBox = true;
-        });
-        $(".div-box").mouseout(function () { // 鼠标在div区域外关闭焦点开关
-        isBox = false;
-        });
-        $(".div-box").blur(function () { // div失去焦点时通过焦点开关状态判断鼠标所在区域
-        if (isBox == true) return false;
-        $(this).find(".dropdown-menu").hide();
-        });
-        $(".dropdown-menu").find('li').each(function () { 
-        $(this).on("click", function () {
-            isBox = false;
-            var text = $(this).text();
-            $(this).parent().siblings(".text").find(".texts").text(text);
-            $(this).parent().parent().blur(); // *********  清除焦点事件  (div本身是没焦点的)
-            $(this).parent().hide();
-        })
-        })
-    });  
+      })
+  })
 
-/*  window.onload = function () {
+  /*  window.onload = function () {
         var oDiv = document.getElementById('scroll');
         var oUl = oDiv.getElementsByTagName('ul')[0];
         var aLi = oDiv.getElementsByTagName('li');
