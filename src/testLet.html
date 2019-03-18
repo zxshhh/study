@@ -7,49 +7,137 @@
     <title>Document</title>
   </head>
   <body></body>
+  <script src="js/jquery.js"></script>
   <script>
-    let con = {
-      mar: function() {
-        setTimeout(function() {
-          console.log(this.a)
-        })
-      },
-      a: 1
-    }
-    con.mar()
+    // let con = {
+    //   mar: function() {
+    //     setTimeout(function() {
+    //       console.log(this.a)
+    //     })
+    //   },
+    //   a: 1
+    // }
+    // con.mar()
 
-    let arr = [{ a: 1 }, { a: 2 }, { a: 3 }]
-    let obj = {}
-    for ({ a: obj.b } of arr) {
-      console.log(obj.b)
-    }
+    // let arr = [{ a: 1 }, { a: 2 }, { a: 3 }]
+    // let obj = {}
+    // for ({ a: obj.b } of arr) {
+    //   console.log(obj.b)
+    // }
 
-    axios.get("http://loaclhost:3000")//当收到相应时，这个promise的状态会变为reslove，但是拿到值需要用户主动调用then方法
-    axios.get("http://loaclhost:3000")
-    .then(res=>{
-        // 主动调用then方法获取值后用户可以自己决定拿这个值干什么
+    // setTimeout(function() {
+    //   console.log('1')
+    // })
+
+    // new Promise(function(resolve) {
+    //   console.log('2')
+    //   for (var i = 0; i < 99; i++) {
+    //     i = 99 && resolve()
+    //   }
+    // })
+    //   .then(function() {
+    //     console.log('3')
+    //   })
+    //   .catch({})
+    // console.log('4')
+
+    // console.log('1')
+
+    // setTimeout(function() {
+    //   console.log('2')
+    //   // process.nextTick(function() {
+    //   //   console.log('3')
+    //   // })
+    //   new Promise(function(resolve) {
+    //     console.log('4')
+    //     resolve()
+    //   }).then(function() {
+    //     console.log('5')
+    //   })
+    // })
+    // process.nextTick(function() {
+    //   console.log('6')
+    // })
+    // new Promise(function(resolve) {
+    //   console.log('7')
+    //   resolve()
+    // }).then(function() {
+    //   console.log('8')
+    // })
+
+    setTimeout(function() {
+      console.log('9')
+      // process.nextTick(function() {
+      //   console.log('10')
+      // })
+      new Promise(function(resolve) {
+        console.log('11')
+        resolve()
+      }).then(function() {
+        console.log('12')
+      })
     })
 
-    axios.get("http://localhost:3000")
-    .then(res=>{
-        // do something
-    },err=>{
-        // 错误处理
-    })
-    // promise提供catch方法也是同样的效果
-    axios.get("http://localhost:3000")
-    .then(res=>{
-        // do something
-    }).catch(res=>{
-        // catch err
-    })
+    var fn = { a: 1 }
+    ;(function(fn) {
+      console.log(fn.a)
+      fn.a = 2
+      var fn = { a: 3 }
+      console.log(fn.a)
+    })(fn)
+    console.log(fn.a)
 
-    async function getInfo(){
-        let res1 = await axios.get("http://localhost:3000/mock.json")
-        let res2 = await axios.get("http://localhost:3000/mock2.json")//等到收到mock.json响应结果后在发出请求
-        let res3 = await axios.get("http://localhost:3000/mock3.json")//等到收到mock2.json响应结果后在发出请求
-        // 等到mock3.json响应结果后，才执行后续代码
-        //do something after response
+    var arr = ['apple', 'orange', 'apple', 'orange', 'pear', 'orange']
+    // function getNum() {
+    //   var obj = {}
+    //   for (var i = 0; i < arr.length; i++) {
+    //     var item = arr[i]
+    //     obj[item] = obj[item] + 1 || 1
+    //   }
+    //   return obj;
+    // }
+    // console.log(getNum())
+    function getNum(){
+      return arr.reduce(function(obj,item){
+        obj[item] = (obj[item]+1) || 1
+        return obj;
+      },{})
     }
+    console.log(getNum())
+
+
+    var arr = [ [1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14] ] ] ], 10];
+    console.log(arr.toString())
+    console.log(Array.from(new Set(arr.toString().split(",").sort((a,b)=>{ return a-b}))))
+    console.log([...new Set(arr.toString().split(",").sort((a,b)=>{ return a-b}))])
+    console.log([...new Set(arr.toString().split(',').filter(item => item).sort((a,b) => {return Number(a) - Number(b)}))])
+
+    // axios.get("http://loaclhost:3000")//当收到相应时，这个promise的状态会变为reslove，但是拿到值需要用户主动调用then方法
+    // axios.get("http://loaclhost:3000")
+    // .then(res=>{
+    //     // 主动调用then方法获取值后用户可以自己决定拿这个值干什么
+    // })
+
+    // axios.get("http://localhost:3000")
+    // .then(res=>{
+    //     // do something
+    // },err=>{              
+    //     // 错误处理
+    // })
+    // // promise提供catch方法也是同样的效果
+    // axios.get("http://localhost:3000")
+    // .then(res=>{
+    //     // do something
+    // }).catch(res=>{
+    //     // catch err
+    // })
+
+    // async function getInfo(){
+    //     let res1 = await axios.get("http://localhost:3000/mock.json")
+    //     let res2 = await axios.get("http://localhost:3000/mock2.json")//等到收到mock.json响应结果后在发出请求
+    //     let res3 = await axios.get("http://localhost:3000/mock3.json")//等到收到mock2.json响应结果后在发出请求
+    //     // 等到mock3.json响应结果后，才执行后续代码
+    //     //do something after response
+    // }
   </script>
 </html>
